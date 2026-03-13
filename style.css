@@ -244,14 +244,14 @@ body {
 .particle {
   position: absolute;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--accent-color); /* Garis sedikit lebih tebal */
+  -webkit-text-stroke: 1px var(--accent-color); /* Garis outline tipis */
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: drop-shadow(0 0 5px var(--accent-color)) 
-          drop-shadow(0 0 15px var(--accent-color)); /* Glow ganda agar super terang */
+  filter: drop-shadow(0 0 2px var(--accent-color)) 
+          drop-shadow(0 0 8px var(--accent-color)); /* Glow lembut */
   animation: rising 15s linear infinite;
-  opacity: 0.8; /* Jauh lebih terlihat */
+  opacity: 0.6; /* Transparansi agar tidak terlalu menutupi konten */
   pointer-events: none;
 }
 

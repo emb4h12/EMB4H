@@ -138,18 +138,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Heart Particle Generation
     const container = document.getElementById('particles-container');
-    const particleCount = 50; // Lebih ramai!
+    const particleCount = 100; // Lebih ramai lagi!
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.innerHTML = '<i class="fas fa-heart"></i>'; // Love Love!
         
-        const size = Math.random() * 15 + 10; // Ukuran hati
+        const size = Math.random() * 12 + 8; // Ukuran hati sedikit lebih bervariasi
         particle.style.fontSize = size + 'px';
         particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.transform = `rotate(${Math.random() * 360}deg)`; // Rotasi acak
-        particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.transform = `rotate(${Math.random() * 360}deg)`; 
+        particle.style.animationDuration = Math.random() * 8 + 12 + 's'; // Durasi lebih lama & bervariasi
+        particle.style.animationDelay = -Math.random() * 20 + 's'; // Delay negatif agar partikel langsung muncul di layar
         container.appendChild(particle);
     }
 
