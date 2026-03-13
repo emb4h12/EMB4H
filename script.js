@@ -136,15 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Particle Generation
+    // Heart Particle Generation
     const container = document.getElementById('particles-container');
-    const particleCount = 20;
+    const particleCount = 50; // Lebih ramai!
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        particle.style.width = Math.random() * 5 + 2 + 'px';
-        particle.style.height = particle.style.width;
+        particle.innerHTML = '<i class="fas fa-heart"></i>'; // Love Love!
+        
+        const size = Math.random() * 15 + 10; // Ukuran hati
+        particle.style.fontSize = size + 'px';
         particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.transform = `rotate(${Math.random() * 360}deg)`; // Rotasi acak
         particle.style.animationDuration = Math.random() * 10 + 10 + 's';
         particle.style.animationDelay = Math.random() * 5 + 's';
         container.appendChild(particle);
