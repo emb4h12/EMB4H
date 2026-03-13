@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMB4H</title>
+    <meta name="description" content="Koleksi link penting dalam satu halaman yang indah dan interaktif.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logoatas.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Aesthetic Overlays -->
+    <div class="grain"></div>
+    <div class="torch"></div>
+    <div id="particles-container"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Spotify-style Music Player -->
+    <div class="lofi-player" id="lofi-toggle">
+        <div class="spotify-icon">
+            <img src="assets/musiclogo.png" alt="Music Logo" class="music-disc-img" onerror="this.src='assets/profile.png'">
+        </div>
+        <div class="music-info">
+            <span class="music-title">Now Playing</span>
+            <span class="music-name">TOR MONITOR KETUA</span>
+        </div>
+    </div>
+    <audio id="lofi-audio">
+        <!-- Masukkan file lagu Anda di folder assets/ dengan nama backsound.MP3 -->
+        <source src="assets/backsound.MP3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <header class="profile">
+            <img src="assets/profile.png" alt="Profile" class="profile-img" id="profile-pic">
+            <div class="profile-info">
+                <h1 id="name">EMB4H</h1>
+                <p id="bio">Terimakasih yang udah support gw love you mwaahhh✨</p>
+            </div>
+        </header>
+
+        <main class="links">
+            <a href="https://tako.id/EMB4H" class="link-card magnetic" id="link-1" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-heart"></i>
+                <div class="link-text">
+                    <span class="stagger-text">💖 | Donasi / Dukung Saya</span>
+                    <small class="link-desc">Bantu EMB4H terus berkarya ✨</small>
+                </div>
+            </a>
+            <a href="https://maydayrp.my.id/" class="link-card magnetic" id="link-2" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-globe"></i>
+                <div class="link-text">
+                    <span class="stagger-text">🌐 | Website Mayday Roleplay</span>
+                    <small class="link-desc">Official Website Resmi Mayday Roleplay</small>
+                </div>
+            </a>
+            <a href="https://discord.gg/maydayrp" class="link-card magnetic" id="link-3" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <div class="link-text">
+                    <span class="stagger-text">🎮 | Mayday Roleplay</span>
+                    <small class="link-desc">SA-MP Server Mayday Roleplay!</small>
+                </div>
+            </a>
+            <a href="https://discord.gg/xzTw3SGnjy" class="link-card magnetic" id="link-4" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <div class="link-text">
+                    <span class="stagger-text">🔥 | Mystoria Roleplay</span>
+                    <small class="link-desc">Fivem Server Mystoria Roleplay!</small>
+                </div>
+            </a>
+            <a href="https://discord.gg/2PpjznVWje" class="link-card magnetic" id="link-5" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <div class="link-text">
+                    <span class="stagger-text">✨ | SQUAD EMB4H</span>
+                    <small class="link-desc">Discord Server Resmi EMB4H</small>
+                </div>
+            </a>
+        </main>
+
+        <footer class="socials">
+            <a href="https://www.tiktok.com/@_emb4h" class="social-icon" title="TikTok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@mbahhhhhh01" class="social-icon" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            <p class="copyright">Copyright &copy; 2024 by EMB4H</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

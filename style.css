@@ -1,0 +1,579 @@
+:root {
+  --bg-color: #121212;
+  --accent-color: #ff007f; /* Bright Pink Cerah */
+  --accent-secondary: #ff5e62;
+  --text-primary: #ffffff;
+  --text-secondary: #ffb7a1;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none !important; /* Hide default for custom cursor */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Latar Belakang Parallax */
+  background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), 
+              url('assets/background.png');
+  background-size: 110% 110%; /* Sedikit lebih besar untuk efek parallax */
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-position 0.2s ease-out;
+}
+
+/* Film Grain Overlay */
+.grain {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04; /* Very subtle */
+  pointer-events: none;
+  z-index: 999;
+  animation: noise 0.2s infinite;
+}
+
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  30% { transform: translate(1%, 1%); }
+  50% { transform: translate(-1%, 1%); }
+  70% { transform: translate(1%, -1%); }
+}
+
+/* Torch Effect */
+.torch {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(255, 140, 105, 0.05) 0%, 
+              transparent 70%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Spotify-style Music Player */
+.lofi-player {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: rgba(18, 18, 18, 0.85); /* Spotify dark theme */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px; /* Lebih pas untuk icon saat tertutup */
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  width: 52px; /* Lebar tetap saat tertutup */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.lofi-player:hover, .lofi-player.playing {
+  width: auto;
+  max-width: 300px;
+  padding-right: 20px; /* Ruang untuk teks saat terbuka */
+  border-color: #ff007f;
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.3);
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateX(-10px); /* Muncul dari balik logo */
+  transition: all 0.5s ease;
+}
+
+.lofi-player:hover .music-info, .lofi-player.playing .music-info {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.music-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ff007f;
+  font-weight: 700;
+}
+
+.music-name {
+  font-size: 0.85rem;
+  color: white;
+  font-weight: 500;
+}
+
+.spotify-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0; /* Penting! Agar icon tidak gepeng saat tertutup */
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.music-disc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lofi-player.playing .spotify-icon {
+  border-color: #ff007f;
+  animation: rotateSpotify 5s linear infinite;
+}
+
+@keyframes rotateSpotify {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .lofi-player {
+    bottom: 20px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px;
+    width: 52px; /* Lebar tetap saat tertutup agar logo pas di tengah */
+  }
+
+  .lofi-player:hover, .lofi-player.playing {
+    width: auto;
+    max-width: 250px;
+    padding-right: 15px;
+    transform: translateX(-50%);
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  padding: 3rem;
+  text-align: center;
+  z-index: 10;
+  animation: float 6s ease-in-out infinite; /* Floating Animation */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); } /* Lebih stabil, tidak terlalu jauh melayang */
+}
+
+/* Custom Cursor - Sembunyikan di Mobile */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot, .cursor-outline { display: none !important; }
+  * { cursor: auto !important; }
+}
+
+/* Custom Cursor - Dot & Outline */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent-color);
+}
+
+.cursor-dot, .cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover State for Cursor */
+.cursor-hover .cursor-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-secondary);
+}
+
+.cursor-hover .cursor-outline {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 140, 105, 0.1);
+  border-color: var(--accent-secondary);
+}
+
+/* Particles */
+#particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: var(--accent-color);
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: rising 15s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes rising {
+  from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* Profile Section */
+.profile {
+  margin-bottom: 2.5rem;
+  animation: fadeInDown 1s ease-out;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-bottom: 1.25rem;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(255, 140, 105, 0.3), 0 15px 35px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  transition: var(--transition);
+  position: relative;
+  z-index: 2;
+}
+
+.profile-img:hover {
+  transform: scale(1.08) rotate(5deg);
+}
+
+.profile-info {
+  opacity: 0; /* Default hidden for entrance */
+}
+
+.profile h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #ff8c69, #ff5e62, #ff8c69);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineText 3s linear infinite; /* Shimmer is separate */
+  position: relative;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes shineText {
+  to { background-position: 200% center; }
+}
+
+.profile p {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* Links Section */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  perspective: 1200px; /* 3D Perspective */
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform 0.1s ease-out, background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.7s ease-out forwards;
+  opacity: 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.link-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 4.5rem;
+  transition: var(--transition);
+}
+
+.link-text span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.link-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0;
+  max-height: 0;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.link-card:hover .link-desc {
+  opacity: 1;
+  max-height: 20px;
+  margin-top: 4px;
+}
+
+.link-card:hover .link-text {
+  transform: translateX(5px);
+}
+
+/* Staggered Content Reveal */
+.stagger-text {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile h1, .profile p, .link-card, .socials {
+  animation-play-state: paused;
+}
+
+.loaded .profile-info { 
+  animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+}
+
+.loaded .link-card:nth-child(1) { animation: fadeInUp 0.7s ease forwards 0.5s; }
+.loaded .link-card:nth-child(2) { animation: fadeInUp 0.7s ease forwards 0.6s; }
+.loaded .link-card:nth-child(3) { animation: fadeInUp 0.7s ease forwards 0.7s; }
+.loaded .link-card:nth-child(4) { animation: fadeInUp 0.7s ease forwards 0.8s; }
+.loaded .link-card:nth-child(5) { animation: fadeInUp 0.7s ease forwards 0.9s; }
+.loaded .socials { animation: fadeIn 1s ease forwards 1.2s; }
+
+.link-card:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+.link-card:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+.link-card:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+.link-card:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
+.link-card:nth-child(5) { animation-delay: 0.5s; opacity: 0; }
+
+/* Hover Effect Cahaya Lembut */
+.link-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 300%;
+  background: radial-gradient(
+    circle, 
+    rgba(255, 140, 105, 0.15) 0%, 
+    transparent 60%
+  );
+  transform: translate(-50%, -50%) rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: -1;
+}
+
+.link-card:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(45deg) translateY(-20%);
+}
+
+.link-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 140, 105, 0.5);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(255, 140, 105, 0.2);
+  letter-spacing: 1px;
+}
+
+/* Efek Berkilau (Shine) saat Hover */
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.8s;
+  z-index: 1;
+}
+
+.link-card:hover::before {
+  left: 150%;
+}
+
+.link-card i {
+  position: absolute;
+  left: 2rem;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 8px rgba(255, 140, 105, 0.6));
+}
+
+/* Social Icons */
+.socials {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap; /* Memungkinkan copyright turun ke bawah */
+  animation: fadeIn 1.5s ease-out;
+}
+
+.copyright {
+  width: 100%;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.social-icon {
+  color: var(--text-secondary);
+  font-size: 1.75rem;
+  transition: var(--transition);
+}
+
+.social-icon:hover {
+  color: var(--accent-color);
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 10px rgba(255, 140, 105, 0.4));
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  body {
+    background-size: cover;
+    background-position: center bottom; /* Fokus ke mobil/karakter di HP */
+    background-attachment: scroll; /* Mengatasi bug 'white gap' di HP */
+    min-height: 100vh;
+  }
+
+  .container {
+    padding: 2.5rem 1rem;
+    width: 94%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .profile {
+    margin-bottom: 1.5rem; /* Mengurangi jarak bawah profil */
+  }
+
+  .profile h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile p {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .links {
+    gap: 0.85rem; /* Mengecilkan jarak antar tombol */
+  }
+
+  .link-card {
+    padding: 0.85rem 1rem; /* Tombol lebih ramping */
+    border-radius: 15px; /* Border radius lebih kecil agar proporsional */
+  }
+
+  .link-text {
+    margin-left: 3rem;
+  }
+
+  .link-text span {
+    font-size: 0.95rem; /* Font tombol lebih kecil */
+  }
+
+  .link-desc {
+    font-size: 0.7rem;
+  }
+
+  .link-card i {
+    left: 1rem;
+    font-size: 1.15rem;
+  }
+
+  .socials {
+    margin-top: 1.5rem;
+    gap: 1.25rem;
+  }
+}
